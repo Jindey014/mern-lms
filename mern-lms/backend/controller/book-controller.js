@@ -25,25 +25,38 @@ const getBooks = async (req, res) => {
     }
 }
 
-const editBook = async (req, res) => {
+
+const getBook = async (req, res) => {
+
     try {
-        const bookDetail = await Book.findById(req.params.id)
-        try {
-            bookDetail.save()
-            res.status(201).json("Book Details has been updated")
-        } catch (err) {
-            console.log("Error", err)
-        }
+        const booklist = await Book.findById(req.params.id)
+        res.status(201).json(booklist)
     } catch (err) {
         res.status(400).json({ message: err.message })
     }
 }
 
-
-
-const delBook = async (req, res) => {
-
+const editBook = async (req, res) => {
+    let book = req.body;
+    // const editBook = new Book(book)
+    try {
+        await Book.findByIdAndUpdate(req.params.id, book)
+        res.status(201).json(editBook)
+    } catch (err) {
+        res.status(409).json({ message: err.message })
+    }
 }
 
 
-module.exports = { addBook, getBooks, editBook }
+
+const deleteBook = async (req, res) => {
+    try {
+        await Book.deleteOne({ _id: req.params.id })
+        res.status(200).json({ message: "User deleted sucessfully" })
+    } catch (err) {
+        res.status(409).json({ message: err.message })
+    }
+}
+
+
+module.exports = { addBook, getBooks, editBook, getBook, deleteBook }

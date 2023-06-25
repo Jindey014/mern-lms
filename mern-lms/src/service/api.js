@@ -17,20 +17,28 @@ export const getBooks = async () => {
     }
 }
 
+export const getBook = async (id) => {
+    try {
+        return await axios.get(`${URL}/${id}`)
+    } catch (err) {
+        console.log('Error in getting book details', err)
+    }
+}
+export const editBook = async (book, id) => {
+    try {
+        return await axios.post(`${URL}/${id}`, book)
+    } catch (err) {
+        console.log("Error in editing book", err)
+    }
+}
+
 export const deleteBook = async (id) => {
     try {
-        return await axios.delete(`${URL}/book` + id)
+        return await axios.delete(`${URL}/${id}`)
     } catch (err) {
         console.log("Error in deleting book", err)
     }
 }
 
 
-export const editBook = async () => {
-    try {
-        return await axios.post(`${URL}/edit/` + id)
-    } catch (err) {
-        console.log("Error in editing book", err)
-    }
-}
 

@@ -1,8 +1,8 @@
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AddBooks from './component/AddBooks'
-import EditBooks from './component/editBooks'
 import Booklist from './component/Booklist'
+import EditBooks from './component/EditBooks'
 import Navigationbar from './component/Navigationbar'
 import 'bootstrap/dist/css/bootstrap.min.css'
 

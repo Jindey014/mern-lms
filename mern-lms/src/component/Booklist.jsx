@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table'
 import Button from 'react-bootstrap/Button'
-import { getBooks } from '../service/api'
+import { getBooks, deleteBook } from '../service/api'
 import { Link } from 'react-router-dom'
 
 const Booklist = () => {
@@ -13,6 +13,11 @@ const Booklist = () => {
   const getAllBooks = async () => {
     const response = await getBooks()
     setBooks(response.data)
+  }
+
+  const deleteBookDetails = async (id) => {
+    await deleteBook(id)
+    getAllBooks()
   }
 
   return (
@@ -37,7 +42,12 @@ const Booklist = () => {
                     Edit
                   </Button>
                 </Link>
-                <Button variant="primary">Delete</Button>
+                <Button
+                  variant="primary"
+                  onClick={() => deleteBookDetails(book._id)}
+                >
+                  Delete
+                </Button>
               </td>
             </tr>
           ))}
